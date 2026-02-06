@@ -20,6 +20,8 @@ app.get("/", (req, res) => {
 app.post("/interview", async (req, res) => {
   try {
     const { role } = req.body;
+console.log("API KEY EXISTS:", !!process.env.OPENAI_API_KEY);
+
 
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
