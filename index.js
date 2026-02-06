@@ -35,7 +35,7 @@ res.json({
 });
 
   } catch (error) {
-    console.error("AI ERROR:", error.message);
+   console.error("AI FULL ERROR:", error);
     res.status(500).json({ error: "AI error" });
   }
 });
