@@ -28,11 +28,12 @@ console.log("API KEY EXISTS:", !!process.env.OPENAI_API_KEY);
       input: `You are an interview coach. Ask one interview question for a ${role} role.`,
     });
 
-    const text =
-      response.output?.[0]?.content?.[0]?.text ||
-      "No question generated";
+  const output = response.output?.[0]?.content?.[0]?.text;
 
-    res.json({ question: text });
+res.json({
+  question: output || "No question generated",
+});
+
   } catch (error) {
     console.error("AI ERROR:", error.message);
     res.status(500).json({ error: "AI error" });
