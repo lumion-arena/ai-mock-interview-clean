@@ -21,20 +21,15 @@ app.post("/interview", async (req, res) => {
   try {
     const { role } = req.body;
 
-    const response = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
-      messages: [
-        { role: "system", content: "You are an interview coach." },
-        {
-          role: "user",
-          content: `Ask one interview question for a ${role} role.`,
-        },
-      ],
-    });
+   const response = await client.responses.create({
+  model: "gpt-4.1-mini",
+  input: `You are an interview coach. Ask one interview question for a ${role} role.`,
+});
 
-    res.json({
-      question: response.choices[0].message.content,
-    });
+res.json({
+  question: response.output_text,
+});
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "AI error" });
